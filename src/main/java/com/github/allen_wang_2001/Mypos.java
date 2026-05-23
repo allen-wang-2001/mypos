@@ -50,8 +50,11 @@ public class Mypos implements DedicatedServerModInitializer {
 				return false;
 			}
 			if (Match_overall) {
-				// todo: actually write some code that people will use.
-				return true;
+				String finalMessage = content.replace("mypos",coordMessage);
+				net.minecraft.network.chat.Component nameComponent = net.minecraft.network.chat.Component.literal("<" + sender.getName().getString() + "> ");
+				net.minecraft.network.chat.Component messageComponent = net.minecraft.network.chat.Component.literal(finalMessage);
+				net.minecraft.network.chat.Component fullComponent = nameComponent.copy().append(messageComponent);
+				sender.level().getServer().getPlayerList().broadcastSystemMessage(fullComponent, false);return false;
 			}
 
 		}
