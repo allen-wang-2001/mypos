@@ -14,10 +14,10 @@ For a full list of commands, version logs, and roadmap, visit our official docum
 | :--- | :--- |
 | `mypos` | Returns your coordinates privately. |
 | `i am at mypos` | Broadcasts "I am at (coords)" globally. |
+| `mypos-exact` | Returns exact coords |
+| `i am at mypos` | Broadcasts "I am at (exact coords)" |
 
 ## 🚧 Roadmap & Rejected Features
-* **Planned:** `mypos-exact` (precise float coordinates).
-* **Planned:** `i am at mypos-exact` (global broadcast of exact coordinates).
 * **Rejected:** ASCII art of a harp seal (we love seals, but the chat is for coordinates, not marine biology). *Maybe we'll make an exception on April 1st.*
 
 ## 📥 Downloads
