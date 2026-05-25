@@ -1,7 +1,12 @@
 package com.github.allen_wang_2001;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.ChatFormatting;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
@@ -21,7 +26,14 @@ public class Mypos implements DedicatedServerModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		net.fabricmc.fabric.api.message.v1.ServerMessageEvents.ALLOW_CHAT_MESSAGE.register((message, sender, params) -> this.onPlayerChatMessage(message, sender, params));
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {dispatcher.register(Commands.literal("mypos_version").executes(context -> {
+						String version_art = "-------0.4.0 by allenwang2001-------";
 
+						CommandSourceStack source = context.getSource();
+						source.sendSystemMessage(Component.literal(version_art).withStyle(ChatFormatting.GOLD));
+						return 1;
+					}));
+		});
 	}
 
 	public boolean onPlayerChatMessage(PlayerChatMessage message, ServerPlayer sender, ChatType.Bound params) {
@@ -86,6 +98,7 @@ public class Mypos implements DedicatedServerModInitializer {
 				return false;
 			}
 		}
+
 		return true;
 	}
 }
