@@ -69,7 +69,7 @@ public class Mypos implements DedicatedServerModInitializer {
 				return false;
 			}
 			if (Match_overall) {
-				String finalMessage = content.replace("mypos", coordMessage);
+				String finalMessage = content.replaceFirst("mypos", coordMessage);
 				net.minecraft.network.chat.Component nameComponent = net.minecraft.network.chat.Component.literal("<" + sender.getName().getString() + "> ");
 				net.minecraft.network.chat.Component messageComponent = net.minecraft.network.chat.Component.literal(finalMessage);
 				net.minecraft.network.chat.Component fullComponent = nameComponent.copy().append(messageComponent);
@@ -89,7 +89,7 @@ public class Mypos implements DedicatedServerModInitializer {
 				return false;
 			}
 			if (Match_overall_full) {
-				String finalMessage = content.replace("mypos-exact", coordMessage);
+				String finalMessage = content.replaceFirst("mypos-exact", coordMessage);
 				net.minecraft.network.chat.Component nameComponent = net.minecraft.network.chat.Component.literal("<" + sender.getName().getString() + "> ");
 				net.minecraft.network.chat.Component messageComponent = net.minecraft.network.chat.Component.literal(finalMessage);
 				// DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
