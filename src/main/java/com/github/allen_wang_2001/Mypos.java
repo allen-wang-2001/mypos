@@ -1,6 +1,7 @@
 package com.github.allen_wang_2001;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
+import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
@@ -12,7 +13,7 @@ import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Mypos implements DedicatedServerModInitializer {
+public class Mypos implements ModInitializer {
 	public static final String MOD_ID = "mypos";
 
 	// This logger is used to write text to the console and the log file.
@@ -21,13 +22,13 @@ public class Mypos implements DedicatedServerModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
-	public void onInitializeServer() {
+	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		net.fabricmc.fabric.api.message.v1.ServerMessageEvents.ALLOW_CHAT_MESSAGE.register((message, sender, params) -> this.onPlayerChatMessage(message, sender, params));
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {dispatcher.register(Commands.literal("mypos_version").executes(context -> {
-						String version_art = "-------0.4.0 by allenwang2001-------";
+						String version_art = "-------0.5.0 by allenwang2001-------";
 
 						CommandSourceStack source = context.getSource();
 						source.sendSystemMessage(Component.literal(version_art).withStyle(ChatFormatting.GOLD));
