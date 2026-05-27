@@ -1,6 +1,5 @@
 package com.github.allen_wang_2001;
 
-import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.ChatFormatting;
@@ -10,16 +9,10 @@ import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.server.level.ServerPlayer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Locale;
 
 public class Mypos implements ModInitializer {
 	public static final String MOD_ID = "mypos";
-
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
@@ -28,7 +21,7 @@ public class Mypos implements ModInitializer {
 		// Proceed with mild caution.
 		net.fabricmc.fabric.api.message.v1.ServerMessageEvents.ALLOW_CHAT_MESSAGE.register((message, sender, params) -> this.onPlayerChatMessage(message, sender, params));
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {dispatcher.register(Commands.literal("mypos_version").executes(context -> {
-						String version_art = "-------0.5.0 by allenwang2001-------";
+						String version_art = "-------0.6.0 by allenwang2001-------";
 
 						CommandSourceStack source = context.getSource();
 						source.sendSystemMessage(Component.literal(version_art).withStyle(ChatFormatting.GOLD));
@@ -63,14 +56,13 @@ public class Mypos implements ModInitializer {
 			double x = Math.floor(sender.getX());
 			double y = Math.floor(sender.getY());
 			double z = Math.floor(sender.getZ());
-			String coordMessage = String.format("[%.0f,%.0f,%.0f]", x, y, z);
+			String coordMessage = String.format(Locale.US,"[%.0f,%.0f,%.0f]", x, y, z);
 			if (Match_exact) {
-				net.minecraft.network.chat.Component textComponent = net.minecraft.network.chat.Component.literal(coordMessage);
 				sender.sendSystemMessage(net.minecraft.network.chat.Component.literal(coordMessage));
 				return false;
 			}
 			if (Match_overall) {
-				String finalMessage = content.replaceFirst("mypos", coordMessage);
+				String finalMessage = content.replaceFirst("mypos",coordMessage);
 				net.minecraft.network.chat.Component nameComponent = net.minecraft.network.chat.Component.literal("<" + sender.getName().getString() + "> ");
 				net.minecraft.network.chat.Component messageComponent = net.minecraft.network.chat.Component.literal(finalMessage);
 				net.minecraft.network.chat.Component fullComponent = nameComponent.copy().append(messageComponent);
@@ -83,9 +75,8 @@ public class Mypos implements ModInitializer {
 			double x = sender.getX();
 			double y = sender.getY();
 			double z = sender.getZ();
-			String coordMessage = String.format("[%.3f,%.3f,%.3f]", x, y, z);
+			String coordMessage = String.format(Locale.US,"[%.3f,%.3f,%.3f]",x, y, z);
 			if (Match_exact_full) {
-				net.minecraft.network.chat.Component textComponent = net.minecraft.network.chat.Component.literal(coordMessage);
 				sender.sendSystemMessage(net.minecraft.network.chat.Component.literal(coordMessage));
 				return false;
 			}
